@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "src"
+version = "0.1.0"
+description = ""
+authors = ["gabrielhmango <gabrielhmango@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+python-dotenv = "^1.1.1"
+sqlalchemy = "^2.0.41"
+psycopg2 = "^2.9.10"
+pandas = "^2.3.1"
+pymongo = "^4.13.2"
+selenium = "^4.34.2"
+webdriver-manager = "^4.0.2"
+
+
+[tool.poetry.group.dev.dependencies]
+isort = "^6.0.1"
+blue = "^0.9.1"
+pytest = "^8.4.1"
+pytest-cov = "^6.2.1"
+ipykernel = "^6.29.5"
+jupyter = "^1.1.1"
+taskipy = "^1.14.1"
+
+[tool.taskipy.tasks]
+config_git_user = "git config --global user.name \"gabrielhmango\""
+config_git_email = "git config --global user.email \"gabrielhmango@gmail.com\""
+config_git_list = "git config --global --list"
+config_git = "task config_git_user && task config_git_email && task config_git_list"
+format = "blue . && isort ."
+pre_commit = 'task format && task config_git && git status && git add . && git status'
+commit = "git commit -m"
+post_commit = "git push"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
