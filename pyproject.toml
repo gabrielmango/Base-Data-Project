@@ -31,9 +31,11 @@ config_git_email = "git config --global user.email \"gabrielhmango@gmail.com\""
 config_git_list = "git config --global --list"
 config_git = "task config_git_user && task config_git_email && task config_git_list"
 format = "blue . && isort ."
-pre_commit = 'task format && task config_git && git status && git add . && git status'
+pre_commit = "task format && task config_git && git status && git add . && git status"
 commit = "git commit -m"
 post_commit = "git push"
+test = "pytest --cov=src -s"
+
 
 [build-system]
 requires = ["poetry-core"]
