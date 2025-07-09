@@ -1,3 +1,4 @@
+import logging
 import os
 import shutil
 from datetime import datetime
@@ -25,3 +26,19 @@ def test_log_directory_and_file_creation(cleanup_logs):
 
     assert os.path.isdir(expected_dir), 'Logs directory not created!'
     assert os.path.isfile(expected_file), 'Log file not created!'
+
+
+def test_log_file_has_expected_format(cleanup_logs, caplog):
+    logger = Logging('my_script.py')
+    expected_file = f'logs/{datetime.now().strftime("%Y_%m_%d")}/my_script.log'
+
+    log_message = 'Test message'
+    logging.info(log_message)
+
+    assert os.path.exists(expected_file), 'Log file not created'
+
+    with open(expected_file, encoding='utf-8') as f:
+        content = f.read()
+        assert log_message in content
+        assert 'INFO' in content
+        assert '-' in content
