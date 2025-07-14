@@ -1,12 +1,12 @@
 from abc import ABC, abstractmethod
 
-from src.utils.error_handling import ErrorHandler
+from src.utils.base.base_component import BaseComponent
 
 
-class BasePipeline(ABC):
+class BasePipeline(BaseComponent, ABC):
     def __init__(self, name=None):
-        self.pipeline_name = name or self.__class__.__name__
-        self.error_handler = ErrorHandler(self.pipeline_name)
+        super().__init__(name=name)
+        self.pipeline_name = self.component_name
 
     @abstractmethod
     def run(self):
@@ -15,4 +15,5 @@ class BasePipeline(ABC):
 
     def execute(self):
         """Run the pipeline with error handling and logging"""
+        self.logger.info(f'Running pipeline: {self.pipeline_name}')
         return self.error_handler(self.run)()

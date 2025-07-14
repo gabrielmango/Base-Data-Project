@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 
-from src.utils.logging import Logging
+from src.utils.base.base_component import BaseComponent
 
 
-class BaseLoader(ABC):
-    def __init__(self):
-        self.logger = Logging(self.__class__.__name__)
+class BaseLoader(BaseComponent, ABC):
+    def __init__(self, name=None):
+        super().__init__(name=name or self.__class__.__name__)
 
     @abstractmethod
     def load(self, data, *args, **kwargs):
