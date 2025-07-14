@@ -4,14 +4,14 @@ from abc import ABC, abstractmethod
 
 from dotenv import load_dotenv
 
-from utils.logging import Logging
+from src.utils.base.base_component import BaseComponent
 
 load_dotenv()
 
 
-class BaseConfig(ABC):
+class BaseConfig(BaseComponent, ABC):
     def __init__(self):
-        self.logger = Logging(self.__class__.__name__)
+        super().__init__(name=self.__class__.__name__)
         self._validate()
         self._load()
 
