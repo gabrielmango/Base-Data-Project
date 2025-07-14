@@ -18,7 +18,5 @@ class BaseExtractor(BaseComponent, ABC):
         if not data:
             self.logger.error('Extraction returned empty data!')
             return False
-        self.logger.info(
-            f'Data successfully extracted: {type(data).__name__}, {len(data)} records!'
-        )
+        self.logger.info(f'Data successfully extracted: {len(data)} records!')
         return True
