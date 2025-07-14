@@ -4,8 +4,9 @@ from src.utils.base.base_component import BaseComponent
 
 
 class BaseExtractor(BaseComponent, ABC):
-    def __init__(self, name=None):
+    def __init__(self, db_connection, name=None):
         super().__init__(name=name or self.__class__.__name__)
+        self.db_connection = db_connection
 
     @abstractmethod
     def extract(self, *args, **kwargs):
