@@ -17,7 +17,8 @@ class BaseExtractor(BaseComponent, ABC):
         """Validate extracted data"""
         if not data:
             self.logger.error('Extraction returned empty data!')
-            raise ValueError('Invalid extraction data.')
+            return False
         self.logger.info(
             f'Data successfully extracted: {type(data).__name__}, {len(data)} records!'
         )
+        return True
