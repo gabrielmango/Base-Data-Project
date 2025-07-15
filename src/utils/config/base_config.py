@@ -31,7 +31,9 @@ class BaseConfig(BaseComponent, ABC):
     def _load(self):
         for var in self.required_vars:
             setattr(self, var, os.getenv(var))
-        self.logger.info(f'Environment variables were loaded successfully!')
+        self.logger.info(
+            f'{self.component_name}: Environment variables were loaded successfully!'
+        )
 
     def as_dict(self) -> dict:
         return {var: getattr(self, var, None) for var in self.required_vars}
